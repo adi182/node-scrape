@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Node Page Scrape Tool</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  </head>
+  <body>
+      <div class="jumbotron text-center" style="margin-bottom:0">
+          <h1>Node Page Scrape Tool</h1>
+          <form id="checkform" action="/check">
+            <div class="form-group">
+              <label for="url">Enter a URL below:</label>
+              <input style="max-width:400px;margin:0 auto;" type="url" class="form-control" id="url">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+          <div style="padding-top:40px;" id="results"></div>
+        </div>
+
+        <script type="text/javascript">
+        $( "#checkform" ).submit(function( event ) {
+          event.preventDefault();
+          $.ajax({
+            method: "POST",
+            url: "/check",
+            data: {
+              url: $("#url").val()
+            }
+          })
+            .done(function( msg ) {
+              $("#results").html(msg)
+            });
+        });
+</script>
+  </body>
+</html>
